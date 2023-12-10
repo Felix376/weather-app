@@ -76,6 +76,13 @@
       "
     >
       <q-card
+        class="text-h4 q-pa-lg q-mb-lg bg-primary"
+        style="color: #fff"
+        v-if="weatherData"
+      >
+        {{ title }}
+      </q-card>
+      <q-card
         flat
         bordered
         class="bg-secondary row"
@@ -198,6 +205,7 @@ export default {
       longitudeInput: null,
       currentCoordinates: null,
       hourlyArray: null,
+      title: "",
     };
   },
   methods: {
@@ -215,10 +223,20 @@ export default {
       if (this.latitudeInput === null || this.longitudeInput === null) {
         alert("Choose a city or fill in coordinates");
       } else {
+        this.setLocation();
         await this.$store.dispatch("fetchWeatherData", {
           latitude: this.latitudeInput,
           longitude: this.longitudeInput,
         });
+      }
+    },
+    setLocation() {
+      if (this.inputValue) {
+        this.title = this.inputValue;
+      } else {
+        const latitude = this.latitudeInput >= 0 ? "n.B." : "s.B.";
+        const longitude = this.longitudeInput >= 0 ? "ö.L." : "w.L.";
+        this.title = `Coordinates: ${this.latitudeInput}° ${latitude}, ${this.longitudeInput}° ${longitude}`;
       }
     },
     getLocation() {
