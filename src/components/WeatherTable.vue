@@ -125,6 +125,12 @@
         <q-card-section style="flex: 1">
           <div class="text-h6">UV Index: {{ day.uv_index_max }}</div>
         </q-card-section>
+
+        <q-separator vertical inset color="white" size="1.5px" />
+
+        <q-card-section style="flex: 1">
+          <div class="text-h6">Rain sum: {{ day.rain_sum }} mm</div>
+        </q-card-section>
       </q-card>
     </div>
 
@@ -364,6 +370,7 @@ export default {
         sunrise: this.formatTime(this.weatherData.daily.sunrise[index]),
         sunset: this.formatTime(this.weatherData.daily.sunset[index]),
         uv_index_max: this.weatherData.daily.uv_index_max[index],
+        rain_sum: this.weatherData.daily.rain_sum[index],
       }));
     },
     getLocations() {
